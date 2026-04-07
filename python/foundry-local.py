@@ -4,7 +4,7 @@ from foundry_local import FoundryLocalManager
 
 # By using an alias, the most suitable model variant will be
 # downloaded for your end-user's device hardware.
-alias = "phi-3.5-mini"
+alias = "qwen2.5-7b"
 
 # Step 1: Create a FoundryLocalManager and start the service
 print("Starting Foundry Local service...")
@@ -38,14 +38,14 @@ client = openai.OpenAI(
 # Generate a streaming chat completion
 stream = client.chat.completions.create(
     model=manager.get_model_info(alias).id,
-    messages=[{"role": "user", "content": "What is the golden ratio?"}],
-    stream=True,
+    messages=[{"role": "user", "content": "What hip hop song best represents you?"}],
+    stream=True, #false for non-streaming response
 )
 
 # Print the streaming response
 for chunk in stream:
     if chunk.choices[0].delta.content is not None:
-        print(chunk.choices[0].delta.content, end="", flush=True)
+        print(chunk.choices[0].delta.content, end="", flush=True) #set flush to false for non-streaming response, i.e. if stream=False in client chat.completions.create()
 print()
 
 # Cleanup: unload the model to release resources
