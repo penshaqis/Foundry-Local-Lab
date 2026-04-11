@@ -502,10 +502,9 @@ print(f"Device type: {info.device_type}")
 |---------|-----------------|
 | **SDK vs CLI** | The SDK provides programmatic control - essential for applications |
 | **Control plane** | The SDK manages services, models, and caching |
-| **Dynamic ports** | Always use `manager.endpoint` (Python) or `manager.urls[0]` (JS/C#) - never hardcode a port |
+| **Dynamic ports** | Always use `manager.endpoint` (Python)  |
 | **Aliases** | Use aliases for automatic hardware-optimal model selection |
-| **Quick-start** | Python: `FoundryLocalManager(alias)`, JS: `FoundryLocalManager.create()` + `await catalog.getModel(alias)` |
-| **C# redesign** | v0.8.0+ is self-contained - no CLI needed on end-user machines |
+| **Quick-start** | Python: `FoundryLocalManager(alias)` |
 | **Model lifecycle** | Catalog → Download → Load → Use → Unload |
 | **FoundryModelInfo** | Rich metadata: task, device, size, license, tool calling support |
 | **ChatClient** | `createChatClient()` (JS) / `GetChatClientAsync()` (C#) for OpenAI-free usage |
