@@ -17,7 +17,7 @@ print(f"Model ID: {manager.get_model_info(alias).id}")
 # Foundry Local assigns a dynamic port — always use manager.endpoint.
 client = openai.OpenAI(
     base_url=manager.endpoint,
-    api_key=manager.api_key  # API key is not required for local usage
+    #api_key=manager.api_key  # API key is not required for local usage
 )
 
 # Generate a streaming chat completion
