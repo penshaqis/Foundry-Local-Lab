@@ -204,7 +204,7 @@ print(response.choices[0].message.content)
 | Dynamic ports | Always use the SDK to discover the endpoint; never hardcode URLs |
 | Cross-language | The same code pattern works across Python, JavaScript, and C# |
 | OpenAI compatibility | Full OpenAI API compatibility means existing OpenAI code works with minimal changes |
-| Native ChatClient | `createChatClient()` (JS) / `GetChatClientAsync()` (C#) provides an alternative to the OpenAI SDK |
+
 
 ---
 

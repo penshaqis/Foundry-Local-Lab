@@ -39,8 +39,8 @@ client = openai.OpenAI(
 stream = client.chat.completions.create(
     model=manager.get_model_info(alias).id,
     messages=[
-        {"role": "system", "content": "You are Golub, looking over your shoulder since Bilboa Baggins is chasing you, answer prompt as Golub in this predicatment"},
-        {"role": "user", "content": "What hip hop song best represents you?"}
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Tell me a recipe for ice cream sherbet assuming i have a Corsair ice maker and have the following ingredients: lime, vanilla extract, heavy cream, whole milk,and powdered sugar"}
     ],
     stream=True, #false for non-streaming response
 )

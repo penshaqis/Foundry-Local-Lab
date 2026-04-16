@@ -11,22 +11,22 @@ print("Starting Foundry Local service...")
 manager = FoundryLocalManager()
 manager.start_service()
 
-# Step 2: Check if the model is already downloaded
-cached = manager.list_cached_models()
-catalog_info = manager.get_model_info(alias)
-is_cached = any(m.id == catalog_info.id for m in cached) if catalog_info else False
+# # Step 2: Check if the model is already downloaded
+# cached = manager.list_cached_models()
+# catalog_info = manager.get_model_info(alias)
+# is_cached = any(m.id == catalog_info.id for m in cached) if catalog_info else False
 
-if is_cached:
-    print(f"Model already downloaded: {alias}")
-else:
-    print(f"Downloading model: {alias} (this may take several minutes)...")
-    manager.download_model(alias)
-    print(f"Download complete: {alias}")
+# if is_cached:
+#     print(f"Model already downloaded: {alias}")
+# else:
+#     print(f"Downloading model: {alias} (this may take several minutes)...")
+manager.download_model(alias)
+#     print(f"Download complete: {alias}")
 
-# Step 3: Load the model into memory
-print(f"Loading model: {alias}...")
+# # # Step 3: Load the model into memory
+# print(f"Loading model: {alias}...")
 manager.load_model(alias)
-print(f"Cached models: {[m.id for m in cached]}")
+# print(f"Cached models: {[m.id for m in cached]}")
 
 # Configure the OpenAI client to use the local Foundry service.
 # Foundry Local assigns a dynamic port — always use manager.endpoint.
@@ -39,8 +39,8 @@ client = openai.OpenAI(
 stream = client.chat.completions.create(
     model=manager.get_model_info(alias).id,
     messages=[
-        {"role": "system", "content": "You are Golub, looking over your shoulder since Bilboa Baggins is chasing you, answer prompt as Golub in this predicatment"},
-        {"role": "user", "content": "What hip hop song best represents you?"}
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "What is big salty and brown."}
     ],
     stream=True, #false for non-streaming response
 )
@@ -51,5 +51,5 @@ for chunk in stream:
         print(chunk.choices[0].delta.content, end="", flush=True) #set flush to false for non-streaming response, i.e. if stream=False in client chat.completions.create()
 print()
 
-# Cleanup: unload the model to release resources
+# # Cleanup: unload the model to release resources
 manager.unload_model(alias)  # newline at end
