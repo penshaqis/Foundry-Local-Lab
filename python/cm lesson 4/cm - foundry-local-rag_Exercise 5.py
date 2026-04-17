@@ -88,7 +88,7 @@ KNOWLEDGE_BASE = [
 
 
 # ── 2. Simple keyword retrieval ─────────────────────────────────────────────
-def retrieve(query: str, top_k: int = 2) -> list[dict]:
+def retrieve(query: str, top_k: int = 3) -> list[dict]:
     """Return the top-k knowledge chunks most relevant to *query*
     using simple word-overlap scoring."""
     query_words = set(query.lower().split())
