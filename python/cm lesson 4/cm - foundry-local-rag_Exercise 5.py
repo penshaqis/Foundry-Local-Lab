@@ -49,6 +49,12 @@ KNOWLEDGE_BASE = [
         ),
     },
     {
+        "title": "Pricing",
+        "content": (
+            "Foundry Local is completely free and open source under the MIT license."
+        ),
+    },
+    {
         "title": "OpenAI-Compatible API",
         "content": (
             "Foundry Local exposes an OpenAI-compatible REST API so you can "
@@ -125,7 +131,7 @@ def main():
     )
 
     # User question
-    question = "How do I install Foundry Local and what hardware does it support?"
+    question = "How much does Foundry Local cost?"
     print(f"Question: {question}\n")
 
     # Retrieve relevant context
