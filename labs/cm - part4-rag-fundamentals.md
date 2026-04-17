@@ -81,52 +81,6 @@ Each entry represents a "chunk" of knowledge - a focused piece of information on
 
 </details>
 
-<details>
-<summary><b>📘 JavaScript: <code>javascript/foundry-local-rag.mjs</code></b></summary>
-
-The knowledge base uses the same structure as an array of objects:
-
-```javascript
-const KNOWLEDGE_BASE = [
-  {
-    title: "Foundry Local Overview",
-    content:
-      "Foundry Local brings the power of Azure AI Foundry to your local " +
-      "device without requiring an Azure subscription...",
-  },
-  {
-    title: "Supported Hardware",
-    content:
-      "Foundry Local automatically selects the best model variant for " +
-      "your hardware...",
-  },
-  // ... more entries
-];
-```
-
-</details>
-
-<details>
-<summary><b>💜 C#: <code>csharp/RagPipeline.cs</code></b></summary>
-
-The knowledge base uses a list of named tuples:
-
-```csharp
-private static readonly List<(string Title, string Content)> KnowledgeBase =
-[
-    ("Foundry Local Overview",
-     "Foundry Local brings the power of Azure AI Foundry to your local " +
-     "device without requiring an Azure subscription..."),
-
-    ("Supported Hardware",
-     "Foundry Local automatically selects the best model variant for " +
-     "your hardware..."),
-
-    // ... more entries
-];
-```
-
-</details>
 
 > **In a real application**, the knowledge base would come from files on disk, a database, a search index, or an API. For this lab, we use an in-memory list to keep things simple.
 
@@ -154,50 +108,7 @@ def retrieve(query: str, top_k: int = 2) -> list[dict]:
 
 </details>
 
-<details>
-<summary><b>📘 JavaScript</b></summary>
 
-```javascript
-function retrieve(query, topK = 2) {
-  const queryWords = new Set(query.toLowerCase().split(/\s+/));
-  const scored = KNOWLEDGE_BASE.map((chunk) => {
-    const chunkWords = new Set(chunk.content.toLowerCase().split(/\s+/));
-    let overlap = 0;
-    for (const w of queryWords) {
-      if (chunkWords.has(w)) overlap++;
-    }
-    return { overlap, chunk };
-  });
-  scored.sort((a, b) => b.overlap - a.overlap);
-  return scored.slice(0, topK).map((s) => s.chunk);
-}
-```
-
-</details>
-
-<details>
-<summary><b>💜 C#</b></summary>
-
-```csharp
-private static List<(string Title, string Content)> Retrieve(string query, int topK = 2)
-{
-    var queryWords = new HashSet<string>(
-        query.ToLowerInvariant().Split(' ', StringSplitOptions.RemoveEmptyEntries));
-
-    return KnowledgeBase
-        .Select(chunk =>
-        {
-            var chunkWords = new HashSet<string>(
-                chunk.Content.ToLowerInvariant().Split(' ', StringSplitOptions.RemoveEmptyEntries));
-            var overlap = queryWords.Intersect(chunkWords).Count();
-            return (Overlap: overlap, Chunk: chunk);
-        })
-        .OrderByDescending(x => x.Overlap)
-        .Take(topK)
-        .Select(x => x.Chunk)
-        .ToList();
-}
-```
 
 </details>
 
@@ -239,18 +150,6 @@ Run the complete example:
 ```bash
 cd python
 python foundry-local-rag.py
-```
-
-**JavaScript:**
-```bash
-cd javascript
-node foundry-local-rag.mjs
-```
-
-**C#:**
-```bash
-cd csharp
-dotnet run rag
 ```
 
 You should see three things printed:
