@@ -10,6 +10,8 @@ Demonstrates a simple RAG pipeline that runs entirely on-device:
 No cloud services, embeddings API, or vector database required.
 """
 
+from urllib import response
+
 import openai
 from foundry_local import FoundryLocalManager
 
@@ -158,14 +160,24 @@ def main():
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": question},
         ],
-        stream=True,
-    )
+        stream=True,                    #Set stream to True to enable full streaming response (flush = True) or semi-streaming response (flush = false breaks into chunks)
+    )                                   #Set stream to False to disable streaming and get the full response at once after generation is complete.
 
     print("Answer:")
+
+    # STREAMING or SEMIS-STREAMING PRINTING:
+    #If Full or Semi streaming, set flush to True and False, respectively.
+    #If no streaming, comment out the block below and uncomment the No Streaming Block at the end of this file.
     for chunk in stream:
         if chunk.choices[0].delta.content is not None:
             print(chunk.choices[0].delta.content, end="", flush=True)
     print()
+
+    # NO STREAMING PRINTING:
+    # If No streaming, uncomment this block and comment out the streaming block above.
+    # If Full or Semi streaming, comment out the block below and uncomment the streaming block above.
+    # print(stream.choices[0].message.content)
+
 
     # Cleanup: unload the model to release resources
     manager.unload_model(alias)
