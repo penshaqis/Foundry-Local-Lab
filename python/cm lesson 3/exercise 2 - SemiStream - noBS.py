@@ -6,8 +6,6 @@ from foundry_local import FoundryLocalManager
 # downloaded for your end-user's device hardware.
 alias = "qwen2.5-7b"
 
-
-
 # Step 1: Create a FoundryLocalManager and start the service
 print("Starting Foundry Local service...")
 manager = FoundryLocalManager()
@@ -22,36 +20,34 @@ manager.start_service()
 #     print(f"Model already downloaded: {alias}")
 # else:
 #     print(f"Downloading model: {alias} (this may take several minutes)...")
-manager.download_model(alias)
+#     manager.download_model(alias)
 #     print(f"Download complete: {alias}")
 
-# # # Step 3: Load the model into memory
+# # Step 3: Load the model into memory
 # print(f"Loading model: {alias}...")
-manager.load_model(alias)
+# manager.load_model(alias)
 # print(f"Cached models: {[m.id for m in cached]}")
 
 # Configure the OpenAI client to use the local Foundry service.
 # Foundry Local assigns a dynamic port — always use manager.endpoint.
 client = openai.OpenAI(
     base_url=manager.endpoint,
-    api_key=manager.api_key  # API key is not required for local usage
+    # api_key=manager.api_key  # API key is not required for local usage
 )
 
-# Generate a streaming chat completion
+# Or turn off streaming:
 stream = client.chat.completions.create(
     model=manager.get_model_info(alias).id,
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "What caused the beginning of the atlantic slave trade?"}
-    ],
-    stream=True, #false for non-streaming response
+    messages=[{"role": "user", "content": "How many people take the NYC bus daily?"}],
+    stream=True
 )
+
 
 # Print the streaming response
 for chunk in stream:
     if chunk.choices[0].delta.content is not None:
-        print(chunk.choices[0].delta.content, end="", flush=True) #set flush to false for non-streaming response, to true for streaming response
+        print(chunk.choices[0].delta.content, end="", flush=False) #set flush to false for non-streaming response, to true for streaming response
 print()
 
 # # Cleanup: unload the model to release resources
-manager.unload_model(alias)  # newline at end
+# manager.unload_model(alias)  # newline at end
