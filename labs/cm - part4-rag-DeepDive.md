@@ -253,16 +253,17 @@ TF-IDF converts each chunk into a numeric vector based on how important each wor
 HOW TO MODIFY RETRIEVAL FUNCTION IN PYTHON:
 
 ### NEED A CHEATSHEET ON FOR VALID COMBINATIONS of CHUNKING METHODS & RETRIEVAL FUNCTIONS 
-| Chunking Method | Retrival Function | NOTES |
-|-----------|------------------|-----|
-|  Embedding Models           |  Vector Similarity | |
-|  Embedding Models           |  Cosine Similarity | |
-|  Semantics Chunking         |  Cosine Similarity | |
-|  TD-IDF (Numeric vectors)   |  TF-IDF (Cosine Similarity) | SQLite, Optimal for Local excellence |
-|  Fixed-Sized Sliding Window |  Keyword Overlap | <Used in the Lab |
-|  Section Aware Split        |  Keyword Overlap |   #NOT ADVISED   |
-|  Sentence Based splitting   |  Keyword Overlap |   #NOT ADVISED   |
+| Chunk Type | Chunking Method | Retrieval Function | Python Model | NOTES |
+|----|-----------|------------------|-----|-----|
+| ----|  Embedding Models           |  Vector Similarity | |  |
+| ----|  Embedding Models           |  Cosine Similarity | |  |
+| ----|  Semantics Chunking         |  Cosine Similarity | |  |
+| ----|  TD-IDF (Numeric vectors)   |  TF-IDF (Cosine Similarity) |   |SQLite, Optimal for Local excellence |
+| Title/Content Strings|  **Fixed-Sized Sliding Window** |  Keyword Overlap | RAG-BaseCase_POC.py  |Used in the Lab |
+| ----|  Section Aware Split        |  Keyword Overlap |     |#NOT ADVISED   |
+| ----|  Sentence Based splitting   |  Keyword Overlap |     |#NOT ADVISED   |
 
+*Models located at C:\Users\cbern\ ...\Master Toolkit\Retrieval Augmented Generation*
 
 ### Edge/Compact Mode for Constrained Devices
 
