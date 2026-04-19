@@ -255,13 +255,13 @@ HOW TO MODIFY RETRIEVAL FUNCTION IN PYTHON:
 ### NEED A CHEATSHEET ON FOR VALID COMBINATIONS of CHUNKING METHODS & RETRIEVAL FUNCTIONS 
 | Chunking Method | Retrival Function | NOTES |
 |-----------|------------------|-----|
-| CM: Embedding Models           | RF: Vector Similarity | |
-| CM: Embedding Models           | RF: Cosine Similarity | |
-| CM: Semantics Chunking         | RF: Cosine Similarity | |
-| CM: TD-IDF (Numeric vectors)   | RF: TF-IDF (Cosine Similarity) | <Optimal for Local excellence> |
-| CM: Fixed-Sized Sliding Window | RF: Keyword Overlap | <Used in the Lab |
-| CM: Section Aware Split        | RF: Keyword Overlap |   #NOT ADVISED   |
-| CM: Sentence Based splitting   | RF: Keyword Overlap |   #NOT ADVISED   |
+|  Embedding Models           |  Vector Similarity | |
+|  Embedding Models           |  Cosine Similarity | |
+|  Semantics Chunking         |  Cosine Similarity | |
+|  TD-IDF (Numeric vectors)   |  TF-IDF (Cosine Similarity) | SQLite, Optimal for Local excellence |
+|  Fixed-Sized Sliding Window |  Keyword Overlap | <Used in the Lab |
+|  Section Aware Split        |  Keyword Overlap |   #NOT ADVISED   |
+|  Sentence Based splitting   |  Keyword Overlap |   #NOT ADVISED   |
 
 
 ### Edge/Compact Mode for Constrained Devices
