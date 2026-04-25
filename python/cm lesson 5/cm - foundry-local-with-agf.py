@@ -6,46 +6,13 @@ from the Microsoft Agent Framework. The agent runs entirely on-device
 via Foundry Local — no cloud required.
 """
 
-##RECALL: BEFORE TO CALL LLM USED 'foundry_local' & 'openai' NOT 'agent_framework_foundry_local' library
-##-------------------------------------------
-# import openai
-# from foundry_local import FoundryLocalManager
-##-------------------------------------------
-##Step 1: Create a FoundryLocalManager and start the service
-# print("Starting Foundry Local service...")
-# manager = FoundryLocalManager()
-# manager.start_service()
-##-------------------------------------------
-##Step 2: Check if the model is already downloaded
-# print(f"Downloading model: {alias} (this may take several minutes)...")
-# manager.download_model(alias)
-##-------------------------------------------
-##Step 3: Load the model into memory
-# print(f"Loading model: {alias}...")
-# manager.load_model(alias)
-##-------------------------------------------
-#-Step 4: Configure the OpenAI client to use the local Foundry service.
-# Foundry Local assigns a dynamic port — always use manager.endpoint | API_key is not required for local usage
-# client = openai.OpenAI(
-#    base_url=manager.endpoint,
-#    # api_key=manager.api_key  
-# )
-##-------------------------------------------
-#-Step 5: Or turn off streaming:
-# response = client.chat.completions.create(
-#    model=manager.get_model_info(alias).id,
-#    messages=[{"role": "user", "content": "Why is fire hot?"}],
-#    stream=False,
-# )
-# print(response.choices[0].message.content)
-##-------------------------------------------
-
 import asyncio
+
 from agent_framework_foundry_local import FoundryLocalClient
 
 
 async def main():
-    alias = "phi-4-mini"
+    alias = "phi-3.5-mini" #try next "qwen2.5-7b"
 
     print("=== Basic Foundry Local Client Agent Example ===")
 
@@ -74,7 +41,7 @@ async def main():
     print()
 
     # Cleanup: unload the model to release resources
-    manager.unload_model(alias)
+    client.manager.unload_model(alias)
 
 
 asyncio.run(main())
