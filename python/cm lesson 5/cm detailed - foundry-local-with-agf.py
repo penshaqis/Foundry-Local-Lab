@@ -51,7 +51,10 @@ async def main():
 
     # FoundryLocalClient handles service start, model download, and loading
     client = FoundryLocalClient(model=alias)
-    print(f"Client Model ID: {client.model_id}")
+
+    for model in client.manager.list_loaded_models():
+        if model.alias == alias:
+                print(f"Alias: {model.alias} -> Model id: {model.id}")
     print(f"Endpoint: {client.manager.endpoint}\n")
 
     # Create an agent with system instructions
@@ -75,6 +78,6 @@ async def main():
 
     # Cleanup: unload the model to release resources
     client.manager.unload_model(alias)
-
+    print(f"{model.alias} unloaded")
 
 asyncio.run(main())
