@@ -50,7 +50,7 @@ async def main():
     print("=== Basic Foundry Local Client Agent Example ===")
 
     # FoundryLocalClient handles service start, model download, and loading
-    client = FoundryLocalClient(model_id=alias)
+    client = FoundryLocalClient(model=alias)
     print(f"Client Model ID: {client.model_id}")
     print(f"Endpoint: {client.manager.endpoint}\n")
 
