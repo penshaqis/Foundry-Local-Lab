@@ -259,7 +259,9 @@ HOW TO MODIFY RETRIEVAL FUNCTION IN PYTHON:
 | ----|  Embedding Models           |  Cosine Similarity | |  |
 | ----|  Semantics Chunking         |  Cosine Similarity | |  |
 | ----|  TD-IDF (Numeric vectors)   |  TF-IDF (Cosine Similarity) |   |SQLite, Optimal for Local excellence |
-| Title/Content Strings|  **Fixed-Sized Sliding Window** |  Keyword Overlap | RAG-BaseCase_POC.py  |Used in the Lab |
+| Large TextBasedFiles|  Sliding Window |  Keyword Overlap | RAG-BaseCase_wLargePDF.py  | Splits large PDFs into small chunks|
+| Small PDFs|  Fixed-Sized Window |  Keyword Overlap | RAG-BaseCase_wPDF.py  | Takes entirety of small PDFs |
+| Title/Content Strings|  **Fixed-Sized Window** |  Keyword Overlap | RAG-BaseCase_POC.py  |Refactored what was used in the Lab |
 | ----|  Section Aware Split        |  Keyword Overlap |     |#NOT ADVISED   |
 | ----|  Sentence Based splitting   |  Keyword Overlap |     |#NOT ADVISED   |
 

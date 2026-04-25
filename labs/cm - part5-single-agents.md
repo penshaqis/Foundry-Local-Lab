@@ -24,12 +24,11 @@ The **Microsoft Agent Framework** (AGF) provides a standard agent abstraction th
 |---------|-------------|
 | `FoundryLocalClient` | Python: handles service start, model download/load, and creates agents |
 | `client.as_agent()` | Python: creates an agent from the Foundry Local client |
-| `AsAIAgent()` | C#: extension method on `ChatClient` - creates an `AIAgent` |
 | `instructions` | System prompt that shapes the agent's behaviour |
 | `name` | Human-readable label, useful in multi-agent scenarios |
 | `agent.run(prompt)` / `RunAsync()` | Sends a user message and returns the agent's response |
 
-> **Note:** The Agent Framework has a Python and .NET SDK. For JavaScript, we implement a lightweight `ChatAgent` class that mirrors the same pattern using the OpenAI SDK directly.
+> **Note:** The Agent Framework has a Python and .NET SDK. 
 
 ---
 
