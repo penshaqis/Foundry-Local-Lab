@@ -32,18 +32,18 @@ async def main():
     # Create an agent with system instructions
     agent = client.as_agent(
         name="Joker",
-        instructions="You are a good preacher.",
+        instructions="You are a friendly travel guide. Give personalized recommendations for destinations, activities, and local cuisine.",
     )
 
     # Non-streaming: get the complete response at once
     print("--- Non-streaming ---")
-    result = await agent.run("Tell me a joke about a pirate.")
+    result = await agent.run("recommend the best caribbean travel destinations this summer and why.")
     print(f"Agent: {result.text}\n")
 
     # Streaming: get results as they are generated
     print("--- Streaming ---")
     print("Agent: ", end="", flush=True)
-    async for chunk in agent.run("Tell me a joke about a programmer.", stream=True):
+    async for chunk in agent.run("what is the best place to visit in Africa if its your first time?", stream=True):
         if chunk.text:
             print(chunk.text, end="", flush=True)
     print()
