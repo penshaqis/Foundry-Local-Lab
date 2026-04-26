@@ -13,7 +13,7 @@ AGENT_CONFIG = {
 # 2. RUNTIME & MODEL CONFIGURATION
 # ==========================================
 # TOGGLE: Set to True for "qwen2.5-7b", False for "phi-3.5-mini"
-USE_QWEN = True 
+USE_QWEN = True
 
 # TOGGLE: Set to True for streaming, False for standard response
 STREAMING_ENABLED = True 
@@ -57,6 +57,7 @@ async def main():
     agent = client.as_agent(
         name=AGENT_CONFIG["name"],
         instructions=AGENT_CONFIG["instructions"],
+        default_options={"temperature": 0.7, "max_tokens": 2000}
     )
 
     print(f"Chatting with '{AGENT_CONFIG['name']}' (Type 'quit' to exit)")
