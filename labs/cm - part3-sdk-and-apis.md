@@ -26,8 +26,6 @@ Complete [Part 1: Getting Started with Foundry Local](part1-getting-started.md) 
 
 Install **one** of the following language runtimes:
 - **Python 3.9+** - [python.org/downloads](https://www.python.org/downloads/)
-- **Node.js 18+** - [nodejs.org](https://nodejs.org/)
-- **.NET 9.0+** - [dot.net/download](https://dotnet.microsoft.com/download)
 
 ---
 
