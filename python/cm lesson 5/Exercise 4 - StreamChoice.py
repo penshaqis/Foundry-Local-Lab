@@ -33,7 +33,17 @@ async def main():
         name="Socratic Tutor",
         instructions="You are a Socratic tutor. Never give direct answers - instead, guide the student with thoughtful questions.",
     )
+#------------------------------------------------------------------------------
+    # Non-streaming: get the complete response at once
+    print("Chat with the agent (type 'quit' to exit):\n")
+    while True:
+        user_input = input("You: ")
+        if user_input.strip().lower() in ("quit","exit"):
+             break
+        result = await agent.run(user_input)
+        print(f"Agent: {result}\n")
 
+#------------------------------------------------------------------------------
     # Streaming: get results as they are generated
 
     print("Chat with the agent (type 'quit' to exit):\n", end="", flush=True)
@@ -46,6 +56,8 @@ async def main():
              if chunk.text:
                  print(chunk.text, end="", flush=True)
          print()
+
+#------------------------------------------------------------------------------
 
     # Cleanup: unload the model to release resources
     client.manager.unload_model(alias)
