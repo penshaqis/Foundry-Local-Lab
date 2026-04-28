@@ -149,4 +149,8 @@ async def main():
     client.manager.unload_model(MODEL_ALIAS)
     print(f"\n{MODEL_ALIAS} unloaded successfully.")
 
-asyncio.run(main())
+# ... all your agent definitions and the async def main() go above ...
+
+if __name__ == "__main__":
+    # This only runs if you double-click THIS file or run it via CMD
+    asyncio.run(main())
