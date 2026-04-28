@@ -55,27 +55,6 @@ The Zava Creative Writer uses a **sequential pipeline with evaluator-driven feed
 ---
 
 ## Exercises
-### Exercise 0 - Set up Python Dependencies with VENV
-
-<details>
-<summary><strong>🐍 Python</strong></summary>
-
-**Setup 1: Activate an Existing venv**
-```bash
-# search "Foundry_VENV_Windows_VSCode_Playbook.docx" for detailed info
-cd python
-venv\Scripts\Activate.ps1 # Windows (PowerShell)
-```
-
-**Setup 2: Create a new venv (clean reset)**
-```bash
-# search "Foundry_VENV_Windows_VSCode_Playbook.docx" for detailed info
-cd python
-python -m venv venv
-venv\Scripts\Activate.ps1 # Windows (PowerShell)
-pip install -r requirements.txt
-```
-</details>
 
 
 ### Exercise 1 - Run the Zava Creative Writer
@@ -87,14 +66,21 @@ Choose your language and run the application:
 
 The Python version runs as a **web service** with a REST API, demonstrating how to build a production backend.
 
-**Setup:**
+**Setup 1: Activate existting venv**
 ```bash
 cd zava-creative-writer-local/src/api
+
+venv\Scripts\Activate.ps1 # Windows (PowerShell):
+```
+OR 
+
+**Setup 2: Create a new venv (clean reset)**
+```bash
+cd zava-creative-writer-local/src/api
+
 python -m venv venv
 
-# Windows (PowerShell):
-venv\Scripts\Activate.ps1
-
+venv\Scripts\Activate.ps1 # Windows (PowerShell):
 
 pip install -r requirements.txt
 ```
