@@ -45,11 +45,13 @@ async def main():
     researcher = client.as_agent(
         name="Researcher",
         instructions=(
-            "You are a research assistant. When given a topic, provide a concise "
-            "collection of key facts, statistics, and background information. "
-            "Organize your findings as bullet points."
+            "You are a Reinsurance research assistant. When given a topic, provide a concise "
+            "CRITICAL DEFINITION: In (re)insurance, a 'Soft Market' is characterized by "
+            "excess underwriting capacity (high supply) and lower demand, leading to "
+            "intense competition and falling rates. A 'Hard Market' is the opposite. "
+            "Ensure all findings adhere to these industry-standard definitions."
         ),
-        default_options={"temperature": 0.7, "max_tokens": 1024}
+        default_options={"temperature": 0.2, "max_tokens": 1024}
     )
 
     writer = client.as_agent(
@@ -57,6 +59,10 @@ async def main():
         instructions=(
             "You are a skilled blog writer. Using the research notes provided, "
             "write a short, engaging blog post (3-4 paragraphs). "
+            "CRITICAL DEFINITION: In (re)insurance, a 'Soft Market' is characterized by "
+            "excess underwriting capacity (high supply) and lower demand, leading to "
+            "intense competition and falling rates. A 'Hard Market' is the opposite. "
+            "Ensure all findings adhere to these industry-standard definitions."
             "Include a catchy title. Do not make up facts beyond what is given."
         ),
         default_options={"temperature": 0.7, "max_tokens": 1024}
@@ -76,10 +82,22 @@ async def main():
     factcheck_agent = client.as_agent(
         name="FactChecker",
         instructions=(
-            "You verify factual claims. For each claim, state whether it is supported by the research notes. "
-            "Return JSON with verified/unverified items"
+            "You are a pedantic Insurance Industry Auditor. Your sole job is to catch definition errors.\n\n"
+            "CRITICAL KNOWLEDGE:\n"
+            "- Soft Market = High Supply/Capacity + Low/Stable Demand = Low Prices.\n"
+            "- Hard Market = Low Supply/Capacity + High Demand = High Prices.\n\n"
+            "TASK:\n"
+            "1. Scan the text for any definition of 'Soft Market'.\n"
+            "2. If the text says demand exceeds supply, it is FACTUALLY WRONG.\n"
+            "3. Output ONLY a JSON object. No conversational text.\n\n"
+            "JSON STRUCTURE:\n"
+            "{\n"
+            "  'status': 'ERROR' or 'VERIFIED',\n"
+            "  'errors': [{'claim': '...', 'correction': '...'}],\n"
+            "  'explanation': 'Briefly explain why based on supply/demand logic'\n"
+            "}"
         ),
-        default_options={"temperature": 0.2, "max_tokens": 1024}
+        default_options={"temperature": 0.0, "max_tokens": 1024}
     )
 
 
@@ -113,13 +131,12 @@ async def main():
     print(f"\n--- Editor Verdict ---\n{editor_result.text}\n")
 
     # Step 4 — Verify factual claims are supported
-    print("📝 Fact Checker is verifying article claims with research notes...")
+    print("📝 Fact Checker is verifying accuracy of factual statements...")
     factcheck_result = await factcheck_agent.run(
-        f"Confirm article's factual claims are supported by the research notes.\n\n"
-        f"Research notes:\n{research_result.text}\n\n"
-        f"Article:\n{writer_result.text}"
+        f"Confirm article's factual claims are supported by empirical evidence.\n\n"
+        f"Review the claims within the article approved by the editor:\n{writer_result.text}\n\n"
     )
-    print(f"\n--- Fact-checker Report ---\n{factcheck_result.from_json}\n")
+    print(f"\n--- Fact-checker Report ---\n{factcheck_result.text}\n")
 
 
     print("=" * 60)
