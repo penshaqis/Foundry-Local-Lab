@@ -325,35 +325,6 @@ def execute_tool(name, arguments):
 
 ---
 
-### Exercise 7 — Tool Calling with the SDK's ChatClient (JavaScript)
-
-The JavaScript sample already uses the SDK's native `ChatClient` instead of the OpenAI SDK. This is a convenience feature that removes the need to construct an OpenAI client yourself:
-
-```javascript
-import { FoundryLocalManager } from "foundry-local-sdk";
-
-// ChatClient is created directly from the model object
-const model = await manager.catalog.getModel("qwen2.5-0.5b");
-await model.load();
-const chatClient = model.createChatClient();
-
-// completeChat accepts tools as a second parameter
-const response = await chatClient.completeChat(messages, tools);
-```
-
-Compare this with the Python approach which uses the OpenAI SDK explicitly:
-
-```python
-client = openai.OpenAI(base_url=manager.endpoint, api_key=manager.api_key)
-response = client.chat.completions.create(model=model_id, messages=messages, tools=tools)
-```
-
-Both patterns are valid. The `ChatClient` is more convenient; the OpenAI SDK gives you access to the full range of OpenAI parameters.
-
-> **Try it:** Modify the JavaScript sample to use the OpenAI SDK instead of `ChatClient`. You will need `import OpenAI from "openai"` and construct the client with the endpoint from `manager.urls[0]`.
-
----
-
 ### Exercise 8 — Understanding tool_choice
 
 The `tool_choice` parameter controls whether the model *must* use a tool or can choose freely:
@@ -400,7 +371,6 @@ response = client.chat.completions.create(
 3. Tools are defined as **JSON Schema** objects following the OpenAI function-calling format
 4. The conversation uses a **multi-turn pattern**: user, then assistant (tool_calls), then tool (results), then assistant (final answer)
 5. Always use a **model that supports tool calling** (Qwen 2.5, Phi-4-mini)
-6. The SDK's `createChatClient()` provides a convenient way to make tool-calling requests without constructing an OpenAI client
 
 ---
 
