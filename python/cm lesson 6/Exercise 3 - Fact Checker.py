@@ -27,7 +27,7 @@ STREAMING_ENABLED = True
 
 MODEL_ALIAS = "qwen2.5-7b" if USE_QWEN else "phi-3.5-mini"
 
-TOPIC = "Lessons from previous soft markets in Casualty insurance, which (re)inurance companies failed and why. how to succeed in the current softening market"
+TOPIC = "Explain the history of the bismuth rotary device. What applications can be produced when combined with spinning and quantum mechanics?"
 
 async def main():
     # ── Start Foundry Local ──────────────────────────────────────────────
